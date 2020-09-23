@@ -1,3 +1,9 @@
+# Upload -> Process -> Download UI
+
+This was made as a mock user interface for the process of a user uploading a file (a video) to a site, waiting for some sort of processing and downloading the file once it is available.
+
+Start the backend with `npm run start:server` and start the frontend with `npm run start`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
