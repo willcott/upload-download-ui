@@ -15,19 +15,22 @@ class Pipeline extends React.Component {
   handleSelectFileChange = () => {
     this.setState({
       fileName: document.getElementById("myfile").files[0].name,
+
+      showUploadButton: true,
+      showFileSelectedNoifier: true,
     });
-    this.setState({ showUploadButton: true });
-    this.setState({ showFileSelectedNoifier: true });
   };
 
   handleUploadFilesPress = async () => {
     const response = await uploadFiles();
-    this.setState({ showUploadNotifier: true });
-    this.setState({ showStatusNotifier: true });
-    this.setState({ showSpinner: true });
-    this.setState({ uploadMessage: response.data.message });
-    this.setState({ showFileSelect: false });
-    this.setState({ showUploadButton: false });
+    this.setState({
+      showUploadNotifier: true,
+      showStatusNotifier: true,
+      showSpinner: true,
+      uploadMessage: response.data.message,
+      showFileSelect: false,
+      showUploadButton: false,
+    });
 
     if (!this.state.pollingStatus) {
       this.pollStatus();
@@ -39,17 +42,13 @@ class Pipeline extends React.Component {
 
     const response = await getStatus();
     this.setState({ status: response.data.status });
-    console.log("polling");
-
-    console.log(response.data.status);
 
     if (response.data.status !== "Ready") {
       setTimeout(this.pollStatus, 1000);
     }
 
     if (response.data.status === "Ready") {
-      this.setState({ downloadAvailable: true });
-      this.setState({ showSpinner: false });
+      this.setState({ downloadAvailable: true, showSpinner: false });
     }
   };
 
